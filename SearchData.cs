@@ -19,7 +19,7 @@ namespace NaverAutoClick
         private int count = 0;
         public DateTime WrittenDate;
         public DateTime UpdatedDate;
-        private string title;
+        private string title = null;
         public string Url;
         public bool Exclude = false;
 
@@ -54,12 +54,19 @@ namespace NaverAutoClick
         {
             get
             {
-                string source = new WebClient().DownloadString(Url);
-                int start = source.IndexOf("<title>") + 7;
-                int end = source.IndexOf("</title>");
-                string title = source.Substring(start, end - start);
+                if (title == null)
+                {
+                    string source = new WebClient().DownloadString(Url);
+                    int start = source.IndexOf("<title>") + 7;
+                    int end = source.IndexOf("</title>");
+                    if (start >= 0 && end >= 0 && end - start >= 0)
+                    {
+                        title = source.Substring(start, end - start);
+                    }
+                }
                 return title;
             }
+            set { title = Title; }
         }
 
         public SearchData(string company, string keyword, int targetRank, DateTime writtenDate, DateTime updatedDate, string url, Boolean exclude = false)

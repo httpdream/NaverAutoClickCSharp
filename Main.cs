@@ -33,8 +33,6 @@ namespace NaverAutoClick
             searchList.AddRange(new SearchData[] {
                 new SearchData("Realize", "안녕", 1, DateTime.Now, DateTime.Now, "http://cafe.naver.com/saekdongwoods/760")
             });
-
-            MessageBox.Show(searchList[0].Title);
         }
 
         private void buttonShowProcess_Click(object sender, EventArgs e)
